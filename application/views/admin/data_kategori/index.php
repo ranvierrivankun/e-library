@@ -1,6 +1,6 @@
 <div class="container-xxl flex-grow-1 container-p-y">
 
-  <h4 class="fw-bold"><span class="text-muted fw-light"></span> Data Buku</h4>
+  <h4 class="fw-bold"><span class="text-muted fw-light"></span> Data Kategori</h4>
 
   <div class="card">
 
@@ -9,7 +9,7 @@
 
         <div class="btn-group col-lg-2">
          <button class="btn btn-info" onclick="modal_tambah()">
-          Tambah Buku
+          Tambah Kategori
         </button>
       </div>
 
@@ -17,7 +17,7 @@
       </div>
 
       <div class="btn-group col-lg-2">
-       <button class="btn btn-dark" onclick="reload_table_data_buku()">
+       <button class="btn btn-dark" onclick="reload_table_data_kategori()">
         Refresh 
       </button>
     </div>
@@ -27,18 +27,11 @@
 
 <div class="card-body table-border-style">
   <div class="table-responsive text-nowrap">
-    <table id="table_data_buku" class="table table-hover">
+    <table id="table_data_kategori" class="table table-hover">
      <thead>
        <tr>
         <th width="5%">Aksi</th>
-        <th>ISBN</th>
-        <th>Nama Buku</th>
-        <th>Pengarang</th>
-        <th>Kategori</th>
-        <th>Penerbit</th>
-        <th>Buku Baik</th>
-        <th>Buku Rusak</th>
-        <th>Jumlah Buku</th>
+        <th>Nama Kategori</th>
       </tr>
     </thead>
   </table>
@@ -54,7 +47,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel3">Tambah Data Buku</h5>
+        <h5 class="modal-title" id="exampleModalLabel3">Tambah Data Kategori</h5>
         <button
         type="button"
         class="btn-close"
@@ -72,7 +65,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel3">Edit Data Buku</h5>
+        <h5 class="modal-title" id="exampleModalLabel3">Edit Data Kategori</h5>
         <button
         type="button"
         class="btn-close"
@@ -89,7 +82,7 @@
         /*Modal Tambah*/
   function modal_tambah() {
     $.ajax({
-      url: "<?= site_url('data_buku/modal_tambah') ?>",
+      url: "<?= site_url('data_kategori/modal_tambah') ?>",
       beforeSend: ()=> {
         Swal.fire({
           title : 'Menunggu',
@@ -108,15 +101,15 @@
   }
 
   /*Modal Edit*/
-  $('#table_data_buku').on('click', '.edit', function(e) {
+  $('#table_data_kategori').on('click', '.edit', function(e) {
     e.preventDefault();
 
-    var id_buku = $(this).data('id_buku');
+    var id_kategori = $(this).data('id_kategori');
 
     $.ajax({
-      url: "<?= site_url('data_buku/modal_edit')?>",
+      url: "<?= site_url('data_kategori/modal_edit')?>",
       method: "POST",
-      data: {id_buku: id_buku},
+      data: {id_kategori: id_kategori},
 
       beforeSend: ()=> {
         Swal.fire({
@@ -146,12 +139,12 @@
 
   })
 
-    /*Delete Buku*/
-  function delete_buku(id)
+    /*Delete Kategori*/
+  function delete_kategori(id)
   {
     Swal.fire({
       title: 'Delete',
-      text: "Hapus Buku?",
+      text: "Hapus Kategori?",
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -161,7 +154,7 @@
       if (result.value) {
         $.ajax({
           type: "post",
-          url: "<?= site_url('data_buku/delete_buku') ?>",
+          url: "<?= site_url('data_kategori/delete_kategori') ?>",
           data : {
             id: id,
           },
@@ -175,7 +168,7 @@
                 timer: 1000,
                 text: response.sukses
               });
-              reload_table_data_buku();
+              reload_table_data_kategori();
             }
           }
         })
@@ -183,12 +176,12 @@
     })
   }
 
-   /* Table Data Buku */
-  function table_data_buku() {
+   /* Table Data Kategori */
+  function table_data_kategori() {
 
     $(document).ready(function() {
 
-      var table_data_buku = $('#table_data_buku').DataTable({ 
+      var table_data_kategori = $('#table_data_kategori').DataTable({ 
         destroy: true,
         ordering: false,
         processing: true,
@@ -196,7 +189,7 @@
         pageLength: 10,
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], 
         ajax: {
-          url: "<?= site_url('data_buku/table_data_buku')?>",
+          url: "<?= site_url('data_kategori/table_data_kategori')?>",
           method: "POST",
           data: {}
         },
@@ -212,12 +205,12 @@
 
       });
     });
-  }table_data_buku();
+  }table_data_kategori();
 
       /*Reload Table*/
-  function reload_table_data_buku()
+  function reload_table_data_kategori()
   {
-    table_data_buku();
+    table_data_kategori();
     /*$('#status').val('');
     $('#tanggal_filter').val('');*/
   }

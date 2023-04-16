@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2023 at 07:36 AM
+-- Generation Time: Apr 16, 2023 at 05:19 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -20,6 +20,71 @@ SET time_zone = "+00:00";
 --
 -- Database: `e-library`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_buku`
+--
+
+CREATE TABLE `data_buku` (
+  `id_buku` int(11) NOT NULL,
+  `judul_buku` varchar(255) NOT NULL,
+  `pengarang_buku` varchar(255) NOT NULL,
+  `isbn_buku` varchar(255) NOT NULL,
+  `penerbit_buku` int(11) NOT NULL,
+  `kategori_buku` int(11) NOT NULL,
+  `buku_baik` int(11) NOT NULL,
+  `buku_rusak` int(11) NOT NULL,
+  `jumlah_buku` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_buku`
+--
+
+INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `pengarang_buku`, `isbn_buku`, `penerbit_buku`, `kategori_buku`, `buku_baik`, `buku_rusak`, `jumlah_buku`) VALUES
+(2, 'Buku Test', 'Test Pengarang', '1234566789', 1, 1, 5, 5, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_kategori`
+--
+
+CREATE TABLE `data_kategori` (
+  `id_kategori` int(11) NOT NULL,
+  `nama_kategori` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_kategori`
+--
+
+INSERT INTO `data_kategori` (`id_kategori`, `nama_kategori`) VALUES
+(1, 'Test Nama Kategori'),
+(5, 'Test Nama Kategori 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_penerbit`
+--
+
+CREATE TABLE `data_penerbit` (
+  `id_penerbit` int(11) NOT NULL,
+  `kode_penerbit` varchar(255) NOT NULL,
+  `nama_penerbit` varchar(255) NOT NULL,
+  `status_penerbit` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_penerbit`
+--
+
+INSERT INTO `data_penerbit` (`id_penerbit`, `kode_penerbit`, `nama_penerbit`, `status_penerbit`) VALUES
+(1, 'P001', 'Test', 2),
+(3, 'P002', 'Test 2', 1);
 
 -- --------------------------------------------------------
 
@@ -100,6 +165,24 @@ INSERT INTO `role_user` (`id_role`, `nama_role`) VALUES
 --
 
 --
+-- Indexes for table `data_buku`
+--
+ALTER TABLE `data_buku`
+  ADD PRIMARY KEY (`id_buku`);
+
+--
+-- Indexes for table `data_kategori`
+--
+ALTER TABLE `data_kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `data_penerbit`
+--
+ALTER TABLE `data_penerbit`
+  ADD PRIMARY KEY (`id_penerbit`);
+
+--
 -- Indexes for table `data_user`
 --
 ALTER TABLE `data_user`
@@ -121,6 +204,24 @@ ALTER TABLE `role_user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `data_buku`
+--
+ALTER TABLE `data_buku`
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `data_kategori`
+--
+ALTER TABLE `data_kategori`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `data_penerbit`
+--
+ALTER TABLE `data_penerbit`
+  MODIFY `id_penerbit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `data_user`
