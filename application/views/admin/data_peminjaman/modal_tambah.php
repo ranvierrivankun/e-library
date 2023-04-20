@@ -14,36 +14,21 @@
 
 		<div class="row g-2">
 			<div class="col mb-2">
-				<label for="emailLarge" class="form-label">ISBN</label>
-				<input type="text" name="isbn_buku" class="form-control" placeholder="Masukan ISBN" required>
-			</div>
-			<div class="col mb-2">
-				<label for="dobLarge" class="form-label">Judul Buku</label>
-				<input type="text" name="judul_buku" class="form-control" placeholder="Masukan Judul Buku" required>
-			</div>
-		</div>
-
-		<div class="row g-2">
-			<div class="col mb-2">
-				<label for="nameLarge" class="form-label">Nama Pengarang</label>
-				<input type="text" name="pengarang_buku" class="form-control" placeholder="Masukan Nama Pengarang" required>
-			</div>
-			<div class="col mb-2">
-				<label for="dobLarge" class="form-label">Tahun Terbit</label>
-				<input type="number" name="tahun_buku" class="form-control" placeholder="Masukan Tahun Terbit" required>
-			</div>
-		</div>
-
-		<div class="row g-2">
-			<div class="col mb-2">
-				<label for="emailLarge" class="form-label">Penerbit Buku</label>
-				<select class="form-control penerbit_buku" name="penerbit_buku" required>
+				<label for="emailLarge" class="form-label">Pilih Peminjam</label>
+				<select class="form-control select_anggota" name="user_id" required>
 					<option value=""></option>
 				</select>
 			</div>
 			<div class="col mb-2">
-				<label for="dobLarge" class="form-label">Kategori Buku</label>
-				<select class="form-control kategori_buku" name="kategori_buku" required>
+				<label for="dobLarge" class="form-label">Tanggal Peminjaman</label>
+				<input type="text" class="form-control" value="<?= date('d F Y') ?>" disabled>
+			</div>
+		</div>
+
+		<div class="row g-2">
+			<div class="col mb-2">
+				<label for="emailLarge" class="form-label">Pilih Buku</label>
+				<select class="form-control select_data_buku" name="buku_id" required>
 					<option value=""></option>
 				</select>
 			</div>
@@ -51,12 +36,12 @@
 
 		<div class="row g-2">
 			<div class="col mb-2">
-				<label for="emailLarge" class="form-label">Buku Baik</label>
-				<input type="number" name="buku_baik" class="form-control" placeholder="Masukan Jumlah Buku Baik" required>
-			</div>
-			<div class="col mb-2">
-				<label for="dobLarge" class="form-label">Buku Rusak</label>
-				<input type="number" name="buku_rusak" class="form-control" placeholder="Masukan Jumlah Buku Rusak" required>
+				<label for="emailLarge" class="form-label">Kondisi Buku</label>
+				<select class="form-control" name="kondisi_buku_pinjam" required>
+					<option value="">-- Pilih Kondisi Buku --</option>
+					<option value="1">Baik</option>
+					<option value="2">Rusak</option>
+				</select>
 			</div>
 		</div>
 
@@ -66,19 +51,19 @@
 		<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
 			Close
 		</button>
-		<button type="submit" class="btn btn-primary">Tambah Buku</button>
+		<button type="submit" class="btn btn-primary">Tambah Peminjam</button>
 	</div>
 
 </form>
 
 <script>
-            /*Select Penerbit*/
-	$(".penerbit_buku").select2({
+            /*Select Buku*/
+	$(".select_data_buku").select2({
 		theme: 'bootstrap4',
 		dropdownParent: $("#tambah"),
-		placeholder: 'Pilih Penerbit Buku',
+		placeholder: 'Pilih Buku',
 		ajax: { 
-			url: "<?= site_url('data_buku/select_penerbit_buku')?>",
+			url: "<?= site_url('peminjaman_buku/select_data_buku')?>",
 			type: "post",
 			dataType: 'json',
 			delay: 250,
@@ -96,13 +81,13 @@
 		}
 	});
 
-	           /*Select Kategori*/
-	$(".kategori_buku").select2({
+	           /*Select Anggota*/
+	$(".select_anggota").select2({
 		theme: 'bootstrap4',
 		dropdownParent: $("#tambah"),
-		placeholder: 'Pilih Kategori Buku',
+		placeholder: 'Pilih Peminjam',
 		ajax: { 
-			url: "<?= site_url('data_buku/select_kategori_buku')?>",
+			url: "<?= site_url('data_peminjaman/select_anggota')?>",
 			type: "post",
 			dataType: 'json',
 			delay: 250,
@@ -126,17 +111,17 @@
 
 		Swal.fire({
 			title: `Konfirmasi`,
-			text: `Tambah Buku?`,
+			text: `Pinjami Buku?`,
 			icon: 'question',
 			showCancelButton : true,
-			confirmButtonText : 'Buat',
+			confirmButtonText : 'Pinjam',
 			confirmButtonColor : '#696cff',
 			cancelButtonText : 'Tidak',
 			reverseButtons : true
 		}).then((result)=> {
 			if(result.value) {
 				$.ajax({
-					url: "<?= site_url('data_buku/proses_tambah')?>",
+					url: "<?= site_url('data_peminjaman/proses_tambah')?>",
 					method: "POST",
 					data: new FormData(this),
 					processData: false,
@@ -160,10 +145,10 @@
 								confirmButtonColor: '#696cff',
 								icon: "success",
 								title: "Berhasil",
-								text: "Buku Berhasil ditambah!",
+								text: "Buku Berhasil dipinjami!",
 								timer: 1500,
 							}).then((e)=> {
-								$('#table_data_buku').DataTable().ajax.reload(null, false);
+								$('#table_peminjaman_buku').DataTable().ajax.reload(null, false);
 								$('#tambah').modal('hide');
 							});
 						} else {

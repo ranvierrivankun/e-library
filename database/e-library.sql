@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2023 at 05:19 PM
+-- Generation Time: Apr 20, 2023 at 10:55 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -32,19 +32,21 @@ CREATE TABLE `data_buku` (
   `judul_buku` varchar(255) NOT NULL,
   `pengarang_buku` varchar(255) NOT NULL,
   `isbn_buku` varchar(255) NOT NULL,
+  `tahun_buku` int(11) NOT NULL,
   `penerbit_buku` int(11) NOT NULL,
   `kategori_buku` int(11) NOT NULL,
   `buku_baik` int(11) NOT NULL,
-  `buku_rusak` int(11) NOT NULL,
-  `jumlah_buku` int(11) NOT NULL
+  `buku_rusak` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `data_buku`
 --
 
-INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `pengarang_buku`, `isbn_buku`, `penerbit_buku`, `kategori_buku`, `buku_baik`, `buku_rusak`, `jumlah_buku`) VALUES
-(2, 'Buku Test', 'Test Pengarang', '1234566789', 1, 1, 5, 5, 10);
+INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `pengarang_buku`, `isbn_buku`, `tahun_buku`, `penerbit_buku`, `kategori_buku`, `buku_baik`, `buku_rusak`) VALUES
+(5, 'Buku 1', 'Pengarang 1', '111-111-1111-11-1', 2001, 4, 6, 4, 5),
+(6, 'Buku 2', 'Pengarang 2', '222-222-2222-22-2', 2002, 5, 7, 5, 5),
+(8, 'Buku 3', 'Pengarang 3', '333-333-3333-33-3', 2003, 6, 8, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -62,8 +64,40 @@ CREATE TABLE `data_kategori` (
 --
 
 INSERT INTO `data_kategori` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'Test Nama Kategori'),
-(5, 'Test Nama Kategori 2');
+(6, 'K1'),
+(7, 'K2'),
+(8, 'K3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_peminjaman`
+--
+
+CREATE TABLE `data_peminjaman` (
+  `id_peminjaman` int(11) NOT NULL,
+  `status_peminjaman` int(11) NOT NULL,
+  `status_pengembalian` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `buku_id` int(11) NOT NULL,
+  `tanggal_peminjaman` varchar(50) NOT NULL,
+  `jam_peminjaman` varchar(20) NOT NULL,
+  `tanggal_pengembalian` varchar(50) DEFAULT NULL,
+  `jam_pengembalian` varchar(20) DEFAULT NULL,
+  `kondisi_buku_pinjam` int(11) NOT NULL,
+  `kondisi_buku_kembali` int(11) DEFAULT NULL,
+  `denda_id` int(11) DEFAULT NULL,
+  `tanggal_diterima_peminjaman` varchar(50) DEFAULT NULL,
+  `tanggal_diterima_pengembalian` varchar(50) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_peminjaman`
+--
+
+INSERT INTO `data_peminjaman` (`id_peminjaman`, `status_peminjaman`, `status_pengembalian`, `user_id`, `buku_id`, `tanggal_peminjaman`, `jam_peminjaman`, `tanggal_pengembalian`, `jam_pengembalian`, `kondisi_buku_pinjam`, `kondisi_buku_kembali`, `denda_id`, `tanggal_diterima_peminjaman`, `tanggal_diterima_pengembalian`, `admin_id`) VALUES
+(38, 2, 1, 2, 5, '2023-04-20', '09:57:42', NULL, NULL, 1, NULL, NULL, '2023-04-20', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -83,8 +117,9 @@ CREATE TABLE `data_penerbit` (
 --
 
 INSERT INTO `data_penerbit` (`id_penerbit`, `kode_penerbit`, `nama_penerbit`, `status_penerbit`) VALUES
-(1, 'P001', 'Test', 2),
-(3, 'P002', 'Test 2', 1);
+(4, 'P001', 'Nama Penerbit 1', 1),
+(5, 'P002', 'Nama Penerbit 2', 1),
+(6, 'P003', 'Nama Penerbit 3', 2);
 
 -- --------------------------------------------------------
 
@@ -177,6 +212,12 @@ ALTER TABLE `data_kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
+-- Indexes for table `data_peminjaman`
+--
+ALTER TABLE `data_peminjaman`
+  ADD PRIMARY KEY (`id_peminjaman`);
+
+--
 -- Indexes for table `data_penerbit`
 --
 ALTER TABLE `data_penerbit`
@@ -209,19 +250,25 @@ ALTER TABLE `role_user`
 -- AUTO_INCREMENT for table `data_buku`
 --
 ALTER TABLE `data_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `data_kategori`
 --
 ALTER TABLE `data_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `data_peminjaman`
+--
+ALTER TABLE `data_peminjaman`
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `data_penerbit`
 --
 ALTER TABLE `data_penerbit`
-  MODIFY `id_penerbit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_penerbit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `data_user`

@@ -25,10 +25,14 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col mb-3">
+		<div class="row g-2">
+			<div class="col mb-2">
 				<label for="nameLarge" class="form-label">Nama Pengarang</label>
 				<input type="text" name="pengarang_buku" class="form-control" placeholder="Masukan Nama Pengarang" value="<?= $edit->pengarang_buku ?>" required>
+			</div>
+			<div class="col mb-2">
+				<label for="dobLarge" class="form-label">Tahun Terbit</label>
+				<input type="number" name="tahun_buku" class="form-control" placeholder="Masukan Tahun Terbit" value="<?= $edit->tahun_buku ?>" required>
 			</div>
 		</div>
 

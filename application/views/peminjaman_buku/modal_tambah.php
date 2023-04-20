@@ -12,10 +12,34 @@
 
 	<div class="modal-body">
 
-		<div class="row">
-			<div class="col mb-3">
-				<label for="nameLarge" class="form-label">Nama Kategori</label>
-				<input type="text" name="nama_kategori" class="form-control" placeholder="Masukan Nama Kategori" required>
+		<div class="row g-2">
+			<div class="col mb-2">
+				<label for="emailLarge" class="form-label">Nama Peminjam</label>
+				<input type="text" class="form-control" value="<?= userdata('nama') ?>" disabled>
+			</div>
+			<div class="col mb-2">
+				<label for="dobLarge" class="form-label">Tanggal Peminjaman</label>
+				<input type="text" class="form-control" value="<?= date('d F Y') ?>" disabled>
+			</div>
+		</div>
+
+		<div class="row g-2">
+			<div class="col mb-2">
+				<label for="emailLarge" class="form-label">Pilih Buku</label>
+				<select class="form-control select_data_buku" name="buku_id" required>
+					<option value=""></option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row g-2">
+			<div class="col mb-2">
+				<label for="emailLarge" class="form-label">Kondisi Buku</label>
+				<select class="form-control" name="kondisi_buku_pinjam" required>
+					<option value="">-- Pilih Kondisi Buku --</option>
+					<option value="1">Baik</option>
+					<option value="2">Rusak</option>
+				</select>
 			</div>
 		</div>
 
@@ -25,29 +49,53 @@
 		<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
 			Close
 		</button>
-		<button type="submit" class="btn btn-primary">Tambah Kategori</button>
+		<button type="submit" class="btn btn-primary">Pinjam Buku</button>
 	</div>
 
 </form>
 
 <script>
-/*Proses Tambah Kategori*/
+            /*Select Buku*/
+	$(".select_data_buku").select2({
+		theme: 'bootstrap4',
+		dropdownParent: $("#tambah"),
+		placeholder: 'Pilih Buku',
+		ajax: { 
+			url: "<?= site_url('peminjaman_buku/select_data_buku')?>",
+			type: "post",
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					searchTerm: params.term
+				};
+			},
+			processResults: function (response) {
+				return {
+					results: response
+				};
+			},
+			cache: true
+		}
+	});
+
+/*Proses Tambah Buku*/
 	$('#form_tambah').on('submit', function(e) {
 		e.preventDefault();
 
 		Swal.fire({
 			title: `Konfirmasi`,
-			text: `Tambah Kategori?`,
+			text: `Pinjam Buku?`,
 			icon: 'question',
 			showCancelButton : true,
-			confirmButtonText : 'Buat',
+			confirmButtonText : 'Pinjam',
 			confirmButtonColor : '#696cff',
 			cancelButtonText : 'Tidak',
 			reverseButtons : true
 		}).then((result)=> {
 			if(result.value) {
 				$.ajax({
-					url: "<?= site_url('data_kategori/proses_tambah')?>",
+					url: "<?= site_url('peminjaman_buku/proses_tambah')?>",
 					method: "POST",
 					data: new FormData(this),
 					processData: false,
@@ -71,10 +119,10 @@
 								confirmButtonColor: '#696cff',
 								icon: "success",
 								title: "Berhasil",
-								text: "Kategori Berhasil ditambah!",
+								text: "Buku Berhasil dipinjam!",
 								timer: 1500,
 							}).then((e)=> {
-								$('#table_data_kategori').DataTable().ajax.reload(null, false);
+								$('#table_peminjaman_buku').DataTable().ajax.reload(null, false);
 								$('#tambah').modal('hide');
 							});
 						} else {
@@ -84,7 +132,7 @@
 								text: data.keterangan,
 								timer: 1500,
 							}).then((e)=> {
-								$('#tambah').modal('hide');
+								/*$('#tambah').modal('hide');*/
 							});
 						}
 

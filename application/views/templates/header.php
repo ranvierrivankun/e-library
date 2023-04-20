@@ -111,77 +111,103 @@ data-template="vertical-menu-template-free"
                 </a>
               </li>
 
+              
+
+              <?php if(userdata('role') == 1) { ?>
+
+                <!-- Menu Proses Peminjaman, Pengembalian, Pesan -->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">MENU</span>
+                </li>
+
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_peminjaman"){echo "active";}?>">
+                  <a href="<?= base_url('data_peminjaman') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-right-arrow"></i>
+                    <div data-i18n="Basic">Data Peminjaman</div>
+                  </a>
+                </li>
+
+                <!-- Menu Administration -->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Administration</span></li>
+
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_user"){echo "active";}?>">
+                  <a href="<?= base_url('data_user') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Basic">Data User</div>
+                  </a>
+                </li>
+
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_penerbit"){echo "active";}?>">
+                  <a href="<?= base_url('data_penerbit') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-bookmarks"></i>
+                    <div data-i18n="Basic">Data Penerbit</div>
+                  </a>
+                </li>
+
+                <li class="menu-item
+                <?php if($this->uri->segment(1)=="data_kategori") { ?>
+                  active
+                <?php } else if($this->uri->segment(1)=="data_buku") { ?>
+                  active
+                <?php } ?>
+
+                " style="">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
+                  <div data-i18n="katalog">Katalog Buku</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item <?php if($this->uri->segment(1)=="data_kategori"){echo "active";}?>">
+                    <a href="<?= base_url('data_kategori') ?>" class="menu-link">
+                      <div data-i18n="Basic">Data Kategori</div>
+                    </a>
+                  </li>
+                  <li class="menu-item <?php if($this->uri->segment(1)=="data_buku"){echo "active";}?>">
+                    <a href="<?= base_url('data_buku') ?>" class="menu-link">
+                      <div data-i18n="Basic">Data Buku</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+            <?php } else if(userdata('role') == 2) { ?>
               <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">MENU</span>
               </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="Library"){echo "active";}?>">
-                <a href="<?= base_url('data_user') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">Library</div>
+              <li class="menu-item <?php if($this->uri->segment(1)=="peminjaman_buku"){echo "active";}?>">
+                <a href="<?= base_url('peminjaman_buku') ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-right-arrow"></i>
+                  <div data-i18n="Basic">Peminjaman Buku</div>
                 </a>
               </li>
 
-              <?php if(userdata('role') == 1) { ?>
-
-               <!-- Menu Administration -->
-               <li class="menu-header small text-uppercase"><span class="menu-header-text">Administration</span></li>
-
-               <li class="menu-item <?php if($this->uri->segment(1)=="data_user"){echo "active";}?>">
-                <a href="<?= base_url('data_user') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-user"></i>
-                  <div data-i18n="Basic">Data User</div>
+              <li class="menu-item <?php if($this->uri->segment(1)=="pengembalian_buku"){echo "active";}?>">
+                <a href="<?= base_url('pengembalian_buku') ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-left-arrow"></i>
+                  <div data-i18n="Basic">Pengembalian Buku</div>
                 </a>
               </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="data_penerbit"){echo "active";}?>">
-                <a href="<?= base_url('data_penerbit') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-bookmarks"></i>
-                  <div data-i18n="Basic">Data Penerbit</div>
+              <li class="menu-item <?php if($this->uri->segment(1)=="pesan"){echo "active";}?>">
+                <a href="<?= base_url('pesan') ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-chat"></i>
+                  <div data-i18n="Basic">Pesan</div>
                 </a>
               </li>
+            <?php } ?>
 
-              <li class="menu-item
-              <?php if($this->uri->segment(1)=="data_kategori") { ?>
-                active
-              <?php } else if($this->uri->segment(1)=="data_buku") { ?>
-                active
-              <?php } ?>
+          </ul>
+        </aside>
+        <!-- / Menu -->
 
-              " style="">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
-                <div data-i18n="katalog">Katalog Buku</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item <?php if($this->uri->segment(1)=="data_kategori"){echo "active";}?>">
-                  <a href="<?= base_url('data_kategori') ?>" class="menu-link">
-                    <div data-i18n="Basic">Data Kategori</div>
-                  </a>
-                </li>
-                <li class="menu-item <?php if($this->uri->segment(1)=="data_buku"){echo "active";}?>">
-                  <a href="<?= base_url('data_buku') ?>" class="menu-link">
-                    <div data-i18n="Basic">Data Buku</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          <?php } else if(userdata('role') == 2) { ?>
-          <?php } ?>
-
-        </ul>
-      </aside>
-      <!-- / Menu -->
-
-      <!-- Layout container -->
-      <div class="layout-page">
-        <!-- Navbar -->
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
 
 
 
-        <!-- / Navbar -->
+          <!-- / Navbar -->
 
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
             <!-- Content -->

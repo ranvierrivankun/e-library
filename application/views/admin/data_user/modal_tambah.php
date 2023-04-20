@@ -102,7 +102,7 @@
             icon: 'question',
             showCancelButton : true,
             confirmButtonText : 'Buat',
-            confirmButtonColor : '#1abc9c',
+            confirmButtonColor : '#696cff',
             cancelButtonText : 'Tidak',
             reverseButtons : true
         }).then((result)=> {

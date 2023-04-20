@@ -48,9 +48,10 @@ class Data_buku extends CI_Controller
 			$td[] = $tb->pengarang_buku;
 			$td[] = $tb->nama_kategori;
 			$td[] = $tb->nama_penerbit;
+			$td[] = $tb->tahun_buku;
 			$td[] = $tb->buku_baik;
 			$td[] = $tb->buku_rusak;
-			$td[] = $tb->jumlah_buku;
+			$td[] = $tb->buku_baik+$tb->buku_rusak;
 			
 			$data[] = $td;
 		}
@@ -88,12 +89,11 @@ class Data_buku extends CI_Controller
 		$isbn_buku 		= $this->input->post('isbn_buku');
 		$judul_buku 	= $this->input->post('judul_buku');
 		$pengarang_buku = $this->input->post('pengarang_buku');
+		$tahun_buku 	= $this->input->post('tahun_buku');
 		$penerbit_buku 	= $this->input->post('penerbit_buku');
 		$kategori_buku 	= $this->input->post('kategori_buku');
 		$buku_baik 		= $this->input->post('buku_baik');
 		$buku_rusak 	= $this->input->post('buku_rusak');
-
-		$jumlah_buku	= $buku_baik + $buku_rusak;
 
 		$proses 		= $this->bd->edit('data_buku', 'isbn_buku', $isbn_buku)->num_rows();
 
@@ -105,12 +105,11 @@ class Data_buku extends CI_Controller
 			$data['isbn_buku']		= $isbn_buku;
 			$data['judul_buku']		= $judul_buku;
 			$data['pengarang_buku']	= $pengarang_buku;
+			$data['tahun_buku']		= $tahun_buku;
 			$data['penerbit_buku']	= $penerbit_buku;
 			$data['kategori_buku']	= $kategori_buku;
 			$data['buku_baik']		= $buku_baik;
 			$data['buku_rusak']		= $buku_rusak;
-
-			$data['jumlah_buku']	= $jumlah_buku;
 
 			$save = $this->bd->save('data_buku', $data);
 
@@ -135,12 +134,11 @@ class Data_buku extends CI_Controller
 		$isbn_buku 		= $this->input->post('isbn_buku');
 		$judul_buku 	= $this->input->post('judul_buku');
 		$pengarang_buku = $this->input->post('pengarang_buku');
+		$tahun_buku 	= $this->input->post('tahun_buku');
 		$penerbit_buku 	= $this->input->post('penerbit_buku');
 		$kategori_buku 	= $this->input->post('kategori_buku');
 		$buku_baik 		= $this->input->post('buku_baik');
 		$buku_rusak 	= $this->input->post('buku_rusak');
-
-		$jumlah_buku	= $buku_baik + $buku_rusak;
 
 		$proses 				= $this->bd->edit('data_buku', 'isbn_buku', $isbn_buku)->num_rows();
 
@@ -161,12 +159,11 @@ class Data_buku extends CI_Controller
 			$data['isbn_buku']		= $isbn_buku_edit;
 			$data['judul_buku']		= $judul_buku;
 			$data['pengarang_buku']	= $pengarang_buku;
+			$data['tahun_buku']		= $tahun_buku;
 			$data['penerbit_buku']	= $penerbit_buku;
 			$data['kategori_buku']	= $kategori_buku;
 			$data['buku_baik']		= $buku_baik;
 			$data['buku_rusak']		= $buku_rusak;
-
-			$data['jumlah_buku']	= $jumlah_buku;
 
 			$update = $this->bd->update('data_buku', $data, 'id_buku', $id_buku);
 
