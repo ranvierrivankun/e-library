@@ -16,8 +16,14 @@ class Data_buku_model extends CI_Model
 			$cari = 
 			'
 			judul_buku LIKE ' . "'%" . $search . "%'" . '
-			pengarang LIKE ' . "'%" . $search . "%'" . '
-			penerbit LIKE ' . "'%" . $search . "%'" . '
+			OR
+			pengarang_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			isbn_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			tahun_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			nama_penerbit LIKE ' . "'%" . $search . "%'" . '
 			';
 			$k_search = $this->db->where("($cari)");
 		}else{
@@ -52,8 +58,14 @@ class Data_buku_model extends CI_Model
 			$cari = 
 			'
 			judul_buku LIKE ' . "'%" . $search . "%'" . '
-			pengarang LIKE ' . "'%" . $search . "%'" . '
-			penerbit LIKE ' . "'%" . $search . "%'" . '
+			OR
+			pengarang_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			isbn_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			tahun_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			nama_penerbit LIKE ' . "'%" . $search . "%'" . '
 			';
 			$k_search = $this->db->where("($cari)");
 		}else{
@@ -79,8 +91,14 @@ class Data_buku_model extends CI_Model
 			$cari = 
 			'
 			judul_buku LIKE ' . "'%" . $search . "%'" . '
-			pengarang LIKE ' . "'%" . $search . "%'" . '
-			penerbit LIKE ' . "'%" . $search . "%'" . '
+			OR
+			pengarang_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			isbn_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			tahun_buku LIKE ' . "'%" . $search . "%'" . '
+			OR
+			nama_penerbit LIKE ' . "'%" . $search . "%'" . '
 			';
 			$k_search = $this->db->where("($cari)");
 		}else{

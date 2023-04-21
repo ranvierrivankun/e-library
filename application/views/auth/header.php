@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="<?= base_url('/assets/template_login/'); ?>images/img-01.png"/>
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/assets/template_login/'); ?>vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
@@ -21,3 +21,8 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/assets/template_login/'); ?>css/main.css">
 	<!--===============================================================================================-->
 </head>
+
+<!-- Jquery -->
+<script src="<?= base_url('/assets'); ?>/plugins/jquery/jquery-3.5.1.js"></script>
+<!-- Sweetalert2 -->
+<ilnk href="<?= base_url(''); ?>assets/plugins/sweetalert2/package/dist/sweetalert2.min.css" rel="stylesheet">

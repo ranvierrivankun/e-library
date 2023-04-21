@@ -35,3 +35,12 @@ function set_pesan($pesan, $tipe = true)
 		$ci->session->set_flashdata('pesan', "<div class='alert alert-danger'><strong>ERROR!</strong> {$pesan} <button type='button' class='close float-end mb-0' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
 	}
 }
+
+if (!function_exists('Rupiah'))
+{
+	function Rupiah($angka)
+	{
+		$jadi = "Rp " . number_format($angka,0,',','.');
+		return $jadi;
+	}
+}

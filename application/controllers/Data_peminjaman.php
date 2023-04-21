@@ -50,6 +50,8 @@ class Data_peminjaman extends CI_Controller
 				$td[] = "<center><div class='btn-group'>$detail $terima $delete</a></center>";
 			} else if ($tb->status_peminjaman === '2') {
 				$td[] = "<center><div class='btn-group'>$detail $delete</a></center>";
+			} else if ($tb->status_peminjaman === '3') {
+				$td[] = "<center><div class='btn-group'>$detail</a></center>";
 			} 
 
 			$td[] = $tb->nama;
@@ -65,9 +67,18 @@ class Data_peminjaman extends CI_Controller
 
 			$ifelse="";
 			if ($tb->status_peminjaman === '1') {
-				$td[] = "<center><span class='badge bg-label-warning'>TERTUNDA</span></center>";
+				$td[] = "<center><span class='badge bg-label-danger'>TERTUNDA</span></center>";
 			} else if ($tb->status_peminjaman === '2') {
 				$td[] = "<center><span class='badge bg-label-primary'>DITERIMA</span></center>";
+			} else if ($tb->status_peminjaman === '3') {
+
+				if($tb->status_pengembalian === '1') {
+					$td[] = "<center><span class='badge bg-label-warning'>PROSES DIKEMBALIKAN</span></center>";
+				} else {
+					$td[] = "<center><span class='badge bg-label-info'>PENGEMBALIAN DITERIMA</span></center>";
+				}
+
+				
 			} 
 			
 			$data[] = $td;
@@ -107,7 +118,7 @@ class Data_peminjaman extends CI_Controller
 
 		$tanggal_diterima_peminjaman = date('Y-m-d');
 
-		$proses 	= $this->db->select('*')->from('data_peminjaman')->where('buku_id', $buku_id)->where('user_id', $user_id)->get()->num_rows();
+		$proses 	= $this->db->select('*')->from('data_peminjaman')->where('status_peminjaman', '1')->or_where('status_peminjaman', '2')->where('buku_id', $buku_id)->where('user_id', $user_id)->get()->num_rows();
 		if($proses > 0) {
 			$output['status'] 	= false;
 			$output['keterangan'] = "Peringatan! Anggota Sedang Meminjam Buku ini";
@@ -132,7 +143,6 @@ class Data_peminjaman extends CI_Controller
 					$data['jam_peminjaman']			= $jam_peminjaman;
 					$data['kondisi_buku_pinjam']	= $kondisi_buku_pinjam;
 					$data['status_peminjaman']		= '2';
-					$data['status_pengembalian']	= '1';
 					$data['tanggal_diterima_peminjaman']	= $tanggal_diterima_peminjaman;
 
 					$save = $this->bd->save('data_peminjaman', $data);
@@ -162,7 +172,6 @@ class Data_peminjaman extends CI_Controller
 					$data['jam_peminjaman']			= $jam_peminjaman;
 					$data['kondisi_buku_pinjam']	= $kondisi_buku_pinjam;
 					$data['status_peminjaman']		= '2';
-					$data['status_pengembalian']	= '1';
 					$data['tanggal_diterima_peminjaman']	= $tanggal_diterima_peminjaman;
 
 					$save = $this->bd->save('data_peminjaman', $data);
@@ -187,7 +196,6 @@ class Data_peminjaman extends CI_Controller
 
 
 			$data['status_peminjaman']				= '2';
-			$data['status_pengembalian']			= '1';
 			$data['tanggal_diterima_peminjaman']	= date('Y-m-d');
 			$data['admin_id']						= userdata('id_user');
 			$update = $this->bd->update('data_peminjaman', $data, 'id_peminjaman', $id_peminjaman);

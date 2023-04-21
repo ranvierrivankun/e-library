@@ -39,11 +39,30 @@ class Dashboard extends CI_Controller
 		$totalPeminjaman					= $this->db->select('*')->from('data_peminjaman')->get()->num_rows();
 		$totalPeminjamanTertunda			= $this->db->select('*')->from('data_peminjaman')->where('status_peminjaman', '1')->get()->num_rows();
 		$totalPeminjamanDiterima			= $this->db->select('*')->from('data_peminjaman')->where('status_peminjaman', '2')->get()->num_rows();
+		$totalPeminjamanDikembalikan			= $this->db->select('*')->from('data_peminjaman')->where('status_peminjaman', '3')->get()->num_rows();
 		$data['totalPeminjaman']			= $totalPeminjaman;
 		$data['totalPeminjamanTertunda']	= $totalPeminjamanTertunda;
 		$data['totalPeminjamanDiterima']	= $totalPeminjamanDiterima;
+		$data['totalPeminjamanDikembalikan']= $totalPeminjamanDikembalikan;
+
+		$totalPengembalian					= $this->db->select('*')->from('data_pengembalian')->get()->num_rows();
+		$totalPengembalianTertunda			= $this->db->select('*')->from('data_peminjaman')->where('status_pengembalian', '1')->get()->num_rows();
+		$totalPengembalianDiterima			= $this->db->select('*')->from('data_peminjaman')->where('status_pengembalian', '2')->get()->num_rows();
+		$data['totalPengembalian']			= $totalPengembalian;
+		$data['totalPengembalianTertunda']	= $totalPengembalianTertunda;
+		$data['totalPengembalianDiterima']	= $totalPengembalianDiterima;
+
+		$totalDenda							= $this->db->select('SUM(tarif_denda) as tarif_denda')->from('data_pengembalian')->join('data_denda', 'id_denda=denda_id')->get()->row()->tarif_denda;
+		$totalRusak			= $this->db->select('*')->from('data_pengembalian')->where('denda_id', '2')->get()->num_rows();
+		$totalHilang			= $this->db->select('*')->from('data_pengembalian')->where('denda_id', '3')->get()->num_rows();
+		$data['totalDenda']					= $totalDenda;
+		$data['totalRusak']					= $totalRusak;
+		$data['totalHilang']				= $totalHilang;
 
 		$totalPeminjamanPengguna			= $this->db->select('*')->from('data_peminjaman')->where('user_id', $id_user)->get()->num_rows();
+		$totalPengembalianPengguna			= $this->db->select('*')->from('data_pengembalian')->where('user_id', $id_user)->get()->num_rows();
+		$data['totalPeminjamanPengguna']	= $totalPeminjamanPengguna;
+		$data['totalPengembalianPengguna']	= $totalPengembalianPengguna;
 
 		$data['title'] = 'Dashboard E-Library';
 		$this->load->view('templates/header', $data);

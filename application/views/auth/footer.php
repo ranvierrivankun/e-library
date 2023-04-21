@@ -14,6 +14,8 @@
 </script>
 <!--===============================================================================================-->
 <script src="<?= base_url('/assets/template_login/'); ?>js/main.js"></script>
+<!-- Sweetalert2 -->
+<script src="<?= base_url(''); ?>assets/plugins/sweetalert2/package/dist/sweetalert2.all.min.js"></script>
 
 </body>
 </html>

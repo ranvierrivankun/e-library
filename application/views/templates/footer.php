@@ -6,9 +6,7 @@
       ©
       <script>
         document.write(new Date().getFullYear());
-      </script>
-      , made by
-      <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+      </script> Aplikasi E-Library Diponegoro 1
     </div>
     
   </div>

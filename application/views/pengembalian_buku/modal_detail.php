@@ -17,7 +17,7 @@
 		</div>
 		<div class="col mb-2">
 			<label for="dobLarge" class="form-label">Tanggal Peminjaman</label>
-			<input type="text" class="form-control" value="<?= $detail->tanggal_peminjaman ?> <?= $detail->jam_peminjaman ?>" disabled>
+			<input type="text" class="form-control" value="<?= $getPeminjam->tanggal_peminjaman ?> <?= $getPeminjam->jam_peminjaman ?>" disabled>
 		</div>
 	</div>
 
@@ -25,7 +25,7 @@
 		<div class="col mb-2">
 			<label for="emailLarge" class="form-label">Kondisi Buku</label>
 			<h5 class="form-control" readonly>
-				<?php if($detail->kondisi_buku_pinjam == 1) { ?>
+				<?php if($getPeminjam->kondisi_buku_pinjam == 1) { ?>
 					Baik
 				<?php } else { ?>
 					Rusak
@@ -47,13 +47,6 @@
 			<label for="emailLarge" class="form-label">Judul Buku</label>
 			<input type="text" class="form-control" value="<?= $getBuku->judul_buku ?>" disabled>
 		</div>
-	</div>
-
-	<div class="row g-2">
-		<div class="col mb-2">
-			<label for="emailLarge" class="form-label">Tahun Buku</label>
-			<input type="text" class="form-control" value="<?= $getBuku->tahun_buku ?>" disabled>
-		</div>
 		<div class="col mb-2">
 			<label for="emailLarge" class="form-label">Nama Penerbit
 
@@ -69,24 +62,30 @@
 	</div>
 </div>
 
-
-<?php if($detail->status_peminjaman == 2 or $detail->status_peminjaman == 3) {?>
-	<div class="row g-2">
-		<div class="col mb-2">
-			Peminjaman Diterima <strong><?= $getAdmin->nama ?></strong> pada tanggal <?= $detail->tanggal_diterima_peminjaman ?>
-		</div>
+<div class="row g-2">
+	<div class="col mb-2">
+		Peminjaman Diterima <strong><?= $getAdmin->nama ?></strong> pada tanggal <?= $getPeminjam->tanggal_diterima_peminjaman ?>
 	</div>
+</div>
+
+<hr>
+
+<div class="row g-2">
+	<div class="col mb-2">
+		<label for="dobLarge" class="form-label">Tanggal Pengembalian</label>
+		<input type="text" class="form-control" value="<?= $detail->tanggal_pengembalian ?> <?= $detail->jam_pengembalian ?>" disabled>
+	</div>
+	<div class="col mb-2">
+		<label for="emailLarge" class="form-label">Denda</label>
+		<input type="text" class="form-control" value="<?= $detail->nama_denda ?> - <?= rupiah($detail->tarif_denda) ?>" disabled>
+	</div>
+</div>
+
+<?php if($detail->admin_id == null) { ?>
 <?php } else { ?>
-<?php } ?>
-
-
-
-<?php if($detail->status_pengembalian == 1) {?>
-<?php } else if($detail->status_pengembalian == 2) { ?>
-	<hr>
 	<div class="row g-2">
 		<div class="col mb-2">
-			Pengembalian Diterima <strong><?= $getAdmin2->nama ?></strong> pada tanggal <?= $detail2->tanggal_diterima_pengembalian ?>
+			Pengembalian Diterima <strong><?= $getAdmin2->nama ?></strong> pada tanggal <?= $detail->tanggal_diterima_pengembalian ?>
 		</div>
 	</div>
 <?php } ?>

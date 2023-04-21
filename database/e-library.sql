@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2023 at 10:55 AM
+-- Generation Time: Apr 21, 2023 at 08:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -44,9 +44,31 @@ CREATE TABLE `data_buku` (
 --
 
 INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `pengarang_buku`, `isbn_buku`, `tahun_buku`, `penerbit_buku`, `kategori_buku`, `buku_baik`, `buku_rusak`) VALUES
-(5, 'Buku 1', 'Pengarang 1', '111-111-1111-11-1', 2001, 4, 6, 4, 5),
+(5, 'Buku 1', 'Pengarang 1', '111-111-1111-11-1', 2001, 4, 6, 5, 5),
 (6, 'Buku 2', 'Pengarang 2', '222-222-2222-22-2', 2002, 5, 7, 5, 5),
-(8, 'Buku 3', 'Pengarang 3', '333-333-3333-33-3', 2003, 6, 8, 5, 5);
+(8, 'Buku 3', 'Pengarang 3', '333-333-3333-33-3', 2003, 6, 8, 4, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_denda`
+--
+
+CREATE TABLE `data_denda` (
+  `id_denda` int(11) NOT NULL,
+  `nama_denda` varchar(255) NOT NULL,
+  `tarif_denda` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_denda`
+--
+
+INSERT INTO `data_denda` (`id_denda`, `nama_denda`, `tarif_denda`) VALUES
+(1, 'Normal', 0),
+(2, 'Buku Rusak', 20000),
+(3, 'Buku Hilang', 50000),
+(4, 'Lain-lain', 0);
 
 -- --------------------------------------------------------
 
@@ -71,6 +93,27 @@ INSERT INTO `data_kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `data_kunjungan`
+--
+
+CREATE TABLE `data_kunjungan` (
+  `id_kunjungan` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `tanggal_kunjungan` varchar(50) NOT NULL,
+  `jam_kunjungan` varchar(20) NOT NULL,
+  `tujuan_kunjungan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_kunjungan`
+--
+
+INSERT INTO `data_kunjungan` (`id_kunjungan`, `user_id`, `tanggal_kunjungan`, `jam_kunjungan`, `tujuan_kunjungan`) VALUES
+(1, 3, '2023-04-21', '20:09:11', 'Ingin mencari Refrensi untuk skripsi saya, terimakasih');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data_peminjaman`
 --
 
@@ -82,13 +125,8 @@ CREATE TABLE `data_peminjaman` (
   `buku_id` int(11) NOT NULL,
   `tanggal_peminjaman` varchar(50) NOT NULL,
   `jam_peminjaman` varchar(20) NOT NULL,
-  `tanggal_pengembalian` varchar(50) DEFAULT NULL,
-  `jam_pengembalian` varchar(20) DEFAULT NULL,
   `kondisi_buku_pinjam` int(11) NOT NULL,
-  `kondisi_buku_kembali` int(11) DEFAULT NULL,
-  `denda_id` int(11) DEFAULT NULL,
   `tanggal_diterima_peminjaman` varchar(50) DEFAULT NULL,
-  `tanggal_diterima_pengembalian` varchar(50) DEFAULT NULL,
   `admin_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -96,8 +134,12 @@ CREATE TABLE `data_peminjaman` (
 -- Dumping data for table `data_peminjaman`
 --
 
-INSERT INTO `data_peminjaman` (`id_peminjaman`, `status_peminjaman`, `status_pengembalian`, `user_id`, `buku_id`, `tanggal_peminjaman`, `jam_peminjaman`, `tanggal_pengembalian`, `jam_pengembalian`, `kondisi_buku_pinjam`, `kondisi_buku_kembali`, `denda_id`, `tanggal_diterima_peminjaman`, `tanggal_diterima_pengembalian`, `admin_id`) VALUES
-(38, 2, 1, 2, 5, '2023-04-20', '09:57:42', NULL, NULL, 1, NULL, NULL, '2023-04-20', NULL, 1);
+INSERT INTO `data_peminjaman` (`id_peminjaman`, `status_peminjaman`, `status_pengembalian`, `user_id`, `buku_id`, `tanggal_peminjaman`, `jam_peminjaman`, `kondisi_buku_pinjam`, `tanggal_diterima_peminjaman`, `admin_id`) VALUES
+(56, 3, 2, 3, 5, '2023-04-15', '09:21:59', 1, '2023-04-15', 1),
+(57, 3, 2, 3, 6, '2023-04-21', '13:48:07', 2, '2023-04-21', 1),
+(59, 3, 2, 4, 8, '2023-04-21', '14:20:42', 1, '2023-04-21', 1),
+(62, 3, 2, 4, 8, '2023-04-21', '14:41:46', 2, '2023-04-21', 2),
+(63, 3, 2, 4, 8, '2023-04-21', '14:44:57', 1, '2023-04-21', 2);
 
 -- --------------------------------------------------------
 
@@ -124,6 +166,35 @@ INSERT INTO `data_penerbit` (`id_penerbit`, `kode_penerbit`, `nama_penerbit`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `data_pengembalian`
+--
+
+CREATE TABLE `data_pengembalian` (
+  `id_pengembalian` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `buku_id` int(11) NOT NULL,
+  `peminjaman_id` int(11) NOT NULL,
+  `tanggal_pengembalian` varchar(50) DEFAULT NULL,
+  `jam_pengembalian` varchar(20) NOT NULL,
+  `denda_id` int(11) NOT NULL,
+  `tanggal_diterima_pengembalian` varchar(50) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_pengembalian`
+--
+
+INSERT INTO `data_pengembalian` (`id_pengembalian`, `user_id`, `buku_id`, `peminjaman_id`, `tanggal_pengembalian`, `jam_pengembalian`, `denda_id`, `tanggal_diterima_pengembalian`, `admin_id`) VALUES
+(11, 3, 5, 56, '2023-04-21', '13:59:02', 1, '2023-04-21', 2),
+(12, 3, 6, 57, '2023-04-21', '14:00:56', 2, '2023-04-21', 2),
+(14, 4, 8, 59, '2023-04-21', '14:21:26', 1, '2023-04-21', 1),
+(17, 4, 8, 62, '2023-04-21', '14:43:13', 3, '2023-04-21', 2),
+(18, 4, 8, 63, '2023-04-21', '14:45:09', 3, '2023-04-21', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data_user`
 --
 
@@ -146,9 +217,9 @@ CREATE TABLE `data_user` (
 
 INSERT INTO `data_user` (`id_user`, `kode_anggota`, `nis`, `password`, `nama`, `alamat`, `user_kelas`, `foto`, `role`, `status`) VALUES
 (1, '-', 1, '$2y$10$lcL0aJbBn6SLPh4.8AeFMussUD2cYv0cQ4CqKFNL22gzqfplXC1E6', 'Admin E-Library', '', '-', 'admin.png', 1, 1),
-(2, 'AP001', 111, '$2y$10$jEr5ZlOVR4S9xz6Qa4yt4e2H/CTSPQjKcHZA3OReJVNUkPzaZwxQ6', 'Imam A.A', 'Kramat', '3', 'Azhure_Forum.png', 2, 1),
-(3, 'AP002', 222, '$2y$10$mU/2uWnQLKtHUXFcFhlRqutyLBSJEnTO4/rUVDlEEE.6a1/YWk/uy', 'Aisha Nadine', 'Cempaka Putih Barat', '9', 'default.png', 2, 1),
-(4, 'AP003', 333, '$2y$10$evhPMy62CvAB1fsaVX5N9.ZTkqHIfAnGkhWF3SUwa2HbGIZN1h5jy', 'Arifin Permana', 'Johar Baru', '6', 'default.png', 2, 1);
+(2, '-', 2, '$2y$10$jEr5ZlOVR4S9xz6Qa4yt4e2H/CTSPQjKcHZA3OReJVNUkPzaZwxQ6', 'Staff E-Library', '', '-', 'admin2.png', 1, 1),
+(3, 'AP001', 111, '$2y$10$mU/2uWnQLKtHUXFcFhlRqutyLBSJEnTO4/rUVDlEEE.6a1/YWk/uy', 'Aisha Nadine', 'Cempaka Putih Barat', '9', 'default.png', 2, 1),
+(4, 'AP002', 222, '$2y$10$evhPMy62CvAB1fsaVX5N9.ZTkqHIfAnGkhWF3SUwa2HbGIZN1h5jy', 'Arifin Permana', 'Johar Baru', '6', 'default.png', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -206,10 +277,22 @@ ALTER TABLE `data_buku`
   ADD PRIMARY KEY (`id_buku`);
 
 --
+-- Indexes for table `data_denda`
+--
+ALTER TABLE `data_denda`
+  ADD PRIMARY KEY (`id_denda`);
+
+--
 -- Indexes for table `data_kategori`
 --
 ALTER TABLE `data_kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `data_kunjungan`
+--
+ALTER TABLE `data_kunjungan`
+  ADD PRIMARY KEY (`id_kunjungan`);
 
 --
 -- Indexes for table `data_peminjaman`
@@ -222,6 +305,12 @@ ALTER TABLE `data_peminjaman`
 --
 ALTER TABLE `data_penerbit`
   ADD PRIMARY KEY (`id_penerbit`);
+
+--
+-- Indexes for table `data_pengembalian`
+--
+ALTER TABLE `data_pengembalian`
+  ADD PRIMARY KEY (`id_pengembalian`);
 
 --
 -- Indexes for table `data_user`
@@ -253,22 +342,40 @@ ALTER TABLE `data_buku`
   MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `data_denda`
+--
+ALTER TABLE `data_denda`
+  MODIFY `id_denda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `data_kategori`
 --
 ALTER TABLE `data_kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `data_kunjungan`
+--
+ALTER TABLE `data_kunjungan`
+  MODIFY `id_kunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `data_peminjaman`
 --
 ALTER TABLE `data_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `data_penerbit`
 --
 ALTER TABLE `data_penerbit`
   MODIFY `id_penerbit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `data_pengembalian`
+--
+ALTER TABLE `data_pengembalian`
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `data_user`

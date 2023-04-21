@@ -75,7 +75,7 @@
               </div>
             </div>
           </div>
-          <span class="fw-semibold d-block mb-1">Katalog Buku</span>
+          <span class="fw-semibold d-block mb-1">Total Buku</span>
 
           <h3 class="card-title mb-2"><?= $totalBuku ?></h3>
 
@@ -108,9 +108,68 @@
           <h3 class="card-title mb-2"><?= $totalPeminjaman ?></h3>
 
           <div class="row">
-            <medium class="">Tertunda <a class="text-warning fw-semibold"><?= $totalPeminjamanTertunda ?></a></medium>
+            <medium class="">Tertunda <a class="text-danger fw-semibold"><?= $totalPeminjamanTertunda ?></a></medium>
             <medium class="">Diterima <a class="text-primary fw-semibold"><?= $totalPeminjamanDiterima ?></a></medium>
+            <medium class="">Dikembalikan <a class="text-info fw-semibold"><?= $totalPeminjamanDikembalikan ?></a></medium>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-12 col-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex align-items-start justify-content-between">
+            <div class="avatar flex-shrink-0">
+              <i class="display-3 tf-icons bx bx-left-arrow"></i>
+            </div>
+            <div class="dropdown">
+              <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3" style="">
+                <a class="dropdown-item" href="<?= base_url('data_pengembalian'); ?>">Lihat Data Pengembalian</a>
+              </div>
+            </div>
+          </div>
+          <span class="fw-semibold d-block mb-1">Pengembalian Buku</span>
+
+          <h3 class="card-title mb-2"><?= $totalPengembalian ?></h3>
+
+          <div class="row">
+            <medium class="">Tertunda <a class="text-danger fw-semibold"><?= $totalPengembalianTertunda ?></a></medium>
+            <medium class="">Diterima <a class="text-info fw-semibold"><?= $totalPengembalianDiterima ?></a></medium>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-12 col-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex align-items-start justify-content-between">
+            <div class="avatar flex-shrink-0">
+              <i class="display-3 tf-icons bx bx-error-alt"></i>
+            </div>
+            <div class="dropdown">
+              <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3" style="">
+                <a class="dropdown-item" href="<?= base_url('data_pengembalian'); ?>">Lihat Data Pengembalian</a>
+                <a class="dropdown-item" href="<?= base_url('data_denda'); ?>">Lihat Data Denda</a>
+              </div>
+            </div>
+          </div>
+          <span class="fw-semibold d-block mb-1">Total Denda Pengembalian</span>
+
+          <h3 class="card-title mb-2"><?= rupiah($totalDenda) ?></h3>
+
+          <div class="row">
+            <medium class="">Buku Rusak <a class="text-danger fw-semibold"><?= $totalRusak ?></a></medium>
+            <medium class="">Buku Hilang <a class="text-warning fw-semibold"><?= $totalHilang ?></a></medium>
+          </div>
+
         </div>
       </div>
     </div>
@@ -135,7 +194,30 @@
         </div>
         <span class="fw-semibold d-block mb-1">Peminjaman Buku</span>
 
-        <h3 class="card-title mb-2"><?= $totalPeminjaman ?></h3>
+        <h3 class="card-title mb-2"><?= $totalPeminjamanPengguna ?></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-12 col-6 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title d-flex align-items-start justify-content-between">
+          <div class="avatar flex-shrink-0">
+            <i class="display-3 tf-icons bx bx-left-arrow"></i>
+          </div>
+          <div class="dropdown">
+            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3" style="">
+              <a class="dropdown-item" href="<?= base_url('pengembalian_buku'); ?>">Lihat Data Pengembalian</a>
+            </div>
+          </div>
+        </div>
+        <span class="fw-semibold d-block mb-1">Pengembalian Buku</span>
+
+        <h3 class="card-title mb-2"><?= $totalPengembalianPengguna ?></h3>
       </div>
     </div>
   </div>

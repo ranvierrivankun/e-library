@@ -14,7 +14,7 @@ class Peminjaman_buku extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'My Profile E-Library';
+		$data['title'] = 'Peminjaman Buku E-Library';
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/topbar');
 		$this->load->view('peminjaman_buku/index');
@@ -43,7 +43,7 @@ class Peminjaman_buku extends CI_Controller
 			$ifelse="";
 			if ($tb->status_peminjaman === '1') {
 				$td[] = "<center><div class='btn-group'>$delete</a></center>";
-			} else if ($tb->status_peminjaman === '2') {
+			} else {
 				$td[] = "<center><div class='btn-group'>$detail</a></center>";
 			} 
 
@@ -59,9 +59,17 @@ class Peminjaman_buku extends CI_Controller
 
 			$ifelse="";
 			if ($tb->status_peminjaman === '1') {
-				$td[] = "<center><span class='badge bg-label-warning'>TERTUNDA</span></center>";
+				$td[] = "<center><span class='badge bg-label-danger'>TERTUNDA</span></center>";
 			} else if ($tb->status_peminjaman === '2') {
 				$td[] = "<center><span class='badge bg-label-primary'>DITERIMA</span></center>";
+			} else if ($tb->status_peminjaman === '3') {
+
+				if($tb->status_pengembalian === '1') {
+					$td[] = "<center><span class='badge bg-label-warning'>PROSES DIKEMBALIKAN</span></center>";
+				} else {
+					$td[] = "<center><span class='badge bg-label-info'>PENGEMBALIAN DITERIMA</span></center>";
+				}
+				
 			} 
 			
 			$data[] = $td;
@@ -98,7 +106,7 @@ class Peminjaman_buku extends CI_Controller
 
 		$kondisi_buku_pinjam 	= $this->input->post('kondisi_buku_pinjam');
 
-		$proses 	= $this->db->select('*')->from('data_peminjaman')->where('buku_id', $buku_id)->where('user_id', $user_id)->get()->num_rows();
+		$proses 	= $this->db->select('*')->from('data_peminjaman')->where('status_peminjaman', '1')->or_where('status_peminjaman', '2')->where('buku_id', $buku_id)->where('user_id', $user_id)->get()->num_rows();
 		if($proses > 0) {
 			$output['status'] 	= false;
 			$output['keterangan'] = "Peringatan! Kamu Sedang Meminjam Buku ini";
@@ -170,15 +178,19 @@ class Peminjaman_buku extends CI_Controller
 		$id_peminjaman 	= $this->input->post('id_peminjaman');
 
 		$detail 		= $this->bd->edit('data_peminjaman', 'id_peminjaman', $id_peminjaman)->row();
-		$getPeminjam 	= $this->db->select('*')->from('data_peminjaman')->where('id_peminjaman', $id_peminjaman)->join('data_user', 'id_user=user_id')->get()->row();
+		$detail2 		= $this->bd->edit('data_pengembalian', 'peminjaman_id', $id_peminjaman)->row();
+		$getPeminjam 	= $this->db->select('*')->from('data_peminjaman')->where('id_peminjaman', $id_peminjaman)->join('data_user', 'id_user=user_id')->join('kelas', 'id_kelas=user_kelas')->get()->row();
 		$getAdmin 	= $this->db->select('*')->from('data_peminjaman')->where('id_peminjaman', $id_peminjaman)->join('data_user', 'id_user=admin_id')->get()->row();
+		$getAdmin2 	= $this->db->select('*')->from('data_pengembalian')->where('peminjaman_id', $id_peminjaman)->join('data_user', 'id_user=admin_id')->get()->row();
 
 		$getBuku 		= $this->db->select('*')->from('data_peminjaman')->where('id_peminjaman', $id_peminjaman)->join('data_buku', 'id_buku=buku_id')->get()->row();
 		$getPenerbitKategori 	= $this->db->select('*')->from('data_buku')->where('id_buku', $getBuku->buku_id)->join('data_penerbit', 'id_penerbit=penerbit_buku')->join('data_kategori', 'id_kategori=kategori_buku')->get()->row();
 
 		$data['detail'] 				= $detail;
+		$data['detail2'] 				= $detail2;
 		$data['getPeminjam']			= $getPeminjam;
 		$data['getAdmin']				= $getAdmin;
+		$data['getAdmin2']				= $getAdmin2;
 		$data['getBuku']				= $getBuku;
 		$data['getPenerbitKategori']	= $getPenerbitKategori;
 

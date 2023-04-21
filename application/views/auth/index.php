@@ -10,7 +10,7 @@
 				<?= form_open('', ['class' => 'user']); ?>
 
 				<span class="login100-form-title">
-					LOGIN E-LIBRARY DIPONEGORO
+					LOGIN E-LIBRARY DIPONEGORO 1
 				</span>
 
 				<?= $this->session->flashdata('pesan'); ?>
@@ -36,8 +36,8 @@
 				<button class="login100-form-btn" type="submit">Login</button>
 
 				<div class="text-center p-t-136">
-					<a class="txt2" href="#">
-						Create your Account
+					<a class="txt2" href="#" onclick="daftar_akun()">
+						Daftar Akun E-Library Diponegoro 1
 						<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 					</a>
 				</div>
@@ -45,3 +45,14 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function daftar_akun(){
+		Swal.fire({
+			icon: 'info',
+			confirmButtonColor: '#696cff',
+			title: `Daftar Akun E-Library`,
+			text: 'Silahkan Datang Ke Perpustakan Diponegoro 1 untuk Mendaftarkan Akun.',
+		})
+	}
+</script>

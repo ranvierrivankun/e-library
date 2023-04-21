@@ -35,7 +35,7 @@ data-template="vertical-menu-template-free"
   <script src="<?= base_url('/assets'); ?>/plugins/jquery/jquery-3.5.1.js"></script>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="<?= base_url('assets/template_admin') ?>/assets/img/favicon/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="<?= base_url('/assets/template_login/'); ?>images/img-01.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -92,7 +92,7 @@ data-template="vertical-menu-template-free"
                 <span class="app-brand-logo demo">
 
                 </span>
-                <span class="app-brand-text demo menu-text fw-bolder ms-2">E-LIBRARY DIPO</span>
+                <span class="app-brand-text demo menu-text fw-bolder ms-2">E-LIBRARY DIPO 1</span>
               </a>
 
               <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -126,6 +126,13 @@ data-template="vertical-menu-template-free"
                   </a>
                 </li>
 
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_pengembalian"){echo "active";}?>">
+                <a href="<?= base_url('data_pengembalian') ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-left-arrow"></i>
+                  <div data-i18n="Basic">Data Pengembalian</div>
+                </a>
+              </li>
+
                 <!-- Menu Administration -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Administration</span></li>
 
@@ -133,6 +140,13 @@ data-template="vertical-menu-template-free"
                   <a href="<?= base_url('data_user') ?>" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user"></i>
                     <div data-i18n="Basic">Data User</div>
+                  </a>
+                </li>
+
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_denda"){echo "active";}?>">
+                  <a href="<?= base_url('data_denda') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-error-alt"></i>
+                    <div data-i18n="Basic">Data Denda</div>
                   </a>
                 </li>
 
@@ -188,10 +202,10 @@ data-template="vertical-menu-template-free"
                 </a>
               </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="pesan"){echo "active";}?>">
-                <a href="<?= base_url('pesan') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-chat"></i>
-                  <div data-i18n="Basic">Pesan</div>
+              <li class="menu-item <?php if($this->uri->segment(1)=="kunjungan"){echo "active";}?>">
+                <a href="<?= base_url('kunjungan') ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-street-view"></i>
+                  <div data-i18n="Basic">Kunjungan</div>
                 </a>
               </li>
             <?php } ?>
