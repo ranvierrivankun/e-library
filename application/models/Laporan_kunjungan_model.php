@@ -15,7 +15,8 @@ class Laporan_kunjungan_model extends CI_Model
 
 		$this->db->select('*');
 		$this->db->from('data_kunjungan');
-		$this->db->join('data_user','id_user=user_id');
+		$this->db->join('data_user as b','b.id_user=user_id');
+		$this->db->join('kelas','id_kelas=b.user_kelas');
 		$this->db->order_by('id_kunjungan', 'DESC');
 
 		return $this->db->get()->result();

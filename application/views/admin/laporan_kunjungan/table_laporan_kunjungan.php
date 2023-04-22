@@ -40,6 +40,7 @@
         <tr>
             <th width="5%" style="text-align: center;">No</th>
             <th>Nama Anggota</th>
+            <th>Kelas</th>
             <th>Tanggal Kunjungan</th>
             <th>Tujuan Kunjungan</th>
         </tr>
@@ -51,6 +52,7 @@
         <tr>
            <td style="text-align: center;"><?= $no++ ?></td>
            <td><?= $gl->nama ?> / <?= $gl->kode_anggota ?></td>
+           <td><?= $gl->kelas_jurusan ?></td>
            <td><?= $gl->tanggal_kunjungan ?></td>
            <td><?= $gl->tujuan_kunjungan ?></td>
        </tr>
