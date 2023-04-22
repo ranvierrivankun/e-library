@@ -78,6 +78,10 @@ data-template="vertical-menu-template-free"
       <link rel="stylesheet" href="<?= base_url('') ?>assets/plugins/select2_last/dist/css/select2.min.css">
       <link rel="stylesheet" href="<?= base_url('') ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
+      <!-- Flatpicker -->
+      <link rel="stylesheet" href="<?= base_url('') ?>assets/plugins/flatpickr/flatpickr.css">
+      <link rel="stylesheet" href="<?= base_url('') ?>assets/plugins/flatpickr/monthSelect/style.css">
+
     </head>
 
     <body>
@@ -127,11 +131,18 @@ data-template="vertical-menu-template-free"
                 </li>
 
                 <li class="menu-item <?php if($this->uri->segment(1)=="data_pengembalian"){echo "active";}?>">
-                <a href="<?= base_url('data_pengembalian') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-left-arrow"></i>
-                  <div data-i18n="Basic">Data Pengembalian</div>
-                </a>
-              </li>
+                  <a href="<?= base_url('data_pengembalian') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-left-arrow"></i>
+                    <div data-i18n="Basic">Data Pengembalian</div>
+                  </a>
+                </li>
+
+                <li class="menu-item <?php if($this->uri->segment(1)=="data_kunjungan"){echo "active";}?>">
+                  <a href="<?= base_url('data_kunjungan') ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-street-view"></i>
+                    <div data-i18n="Basic">Data Kunjungan</div>
+                  </a>
+                </li>
 
                 <!-- Menu Administration -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Administration</span></li>
@@ -163,7 +174,6 @@ data-template="vertical-menu-template-free"
                 <?php } else if($this->uri->segment(1)=="data_buku") { ?>
                   active
                 <?php } ?>
-
                 " style="">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                   <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
@@ -183,45 +193,70 @@ data-template="vertical-menu-template-free"
                 </ul>
               </li>
 
-            <?php } else if(userdata('role') == 2) { ?>
-              <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">MENU</span>
-              </li>
+              <li class="menu-item
+              <?php if($this->uri->segment(1)=="laporan_peminjaman") { ?>
+                active
+              <?php } else if($this->uri->segment(1)=="laporan_kunjungan") { ?>
+                active
+              <?php } ?>
+              " style="">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
+                <div data-i18n="katalog">Laporan</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item <?php if($this->uri->segment(1)=="laporan_peminjaman"){echo "active";}?>">
+                  <a href="<?= base_url('laporan_peminjaman') ?>" class="menu-link">
+                    <div data-i18n="Basic">Pinjam & Kembali</div>
+                  </a>
+                </li>
+                <li class="menu-item <?php if($this->uri->segment(1)=="laporan_kunjungan"){echo "active";}?>">
+                  <a href="<?= base_url('laporan_kunjungan') ?>" class="menu-link">
+                    <div data-i18n="Basic">Laporan Kunjungan</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="peminjaman_buku"){echo "active";}?>">
-                <a href="<?= base_url('peminjaman_buku') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-right-arrow"></i>
-                  <div data-i18n="Basic">Peminjaman Buku</div>
-                </a>
-              </li>
+          <?php } else if(userdata('role') == 2) { ?>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">MENU</span>
+            </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="pengembalian_buku"){echo "active";}?>">
-                <a href="<?= base_url('pengembalian_buku') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-left-arrow"></i>
-                  <div data-i18n="Basic">Pengembalian Buku</div>
-                </a>
-              </li>
+            <li class="menu-item <?php if($this->uri->segment(1)=="peminjaman_buku"){echo "active";}?>">
+              <a href="<?= base_url('peminjaman_buku') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-right-arrow"></i>
+                <div data-i18n="Basic">Peminjaman Buku</div>
+              </a>
+            </li>
 
-              <li class="menu-item <?php if($this->uri->segment(1)=="kunjungan"){echo "active";}?>">
-                <a href="<?= base_url('kunjungan') ?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-street-view"></i>
-                  <div data-i18n="Basic">Kunjungan</div>
-                </a>
-              </li>
-            <?php } ?>
+            <li class="menu-item <?php if($this->uri->segment(1)=="pengembalian_buku"){echo "active";}?>">
+              <a href="<?= base_url('pengembalian_buku') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-left-arrow"></i>
+                <div data-i18n="Basic">Pengembalian Buku</div>
+              </a>
+            </li>
 
-          </ul>
-        </aside>
-        <!-- / Menu -->
+            <li class="menu-item <?php if($this->uri->segment(1)=="kunjungan"){echo "active";}?>">
+              <a href="<?= base_url('kunjungan') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-street-view"></i>
+                <div data-i18n="Basic">Kunjungan</div>
+              </a>
+            </li>
+          <?php } ?>
 
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
+        </ul>
+      </aside>
+      <!-- / Menu -->
+
+      <!-- Layout container -->
+      <div class="layout-page">
+        <!-- Navbar -->
 
 
 
-          <!-- / Navbar -->
+        <!-- / Navbar -->
 
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
             <!-- Content -->

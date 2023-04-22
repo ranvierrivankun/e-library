@@ -59,10 +59,21 @@ class Dashboard extends CI_Controller
 		$data['totalRusak']					= $totalRusak;
 		$data['totalHilang']				= $totalHilang;
 
+		$totalKunjungan						= $this->db->select('*')->from('data_kunjungan')->get()->num_rows();
+		$data['totalKunjungan']				= $totalKunjungan;
+
 		$totalPeminjamanPengguna			= $this->db->select('*')->from('data_peminjaman')->where('user_id', $id_user)->get()->num_rows();
 		$totalPengembalianPengguna			= $this->db->select('*')->from('data_pengembalian')->where('user_id', $id_user)->get()->num_rows();
+		$totalDendaPengguna					= $this->db->select('SUM(tarif_denda) as tarif_denda')->from('data_pengembalian')->join('data_denda', 'id_denda=denda_id')->where('user_id', $id_user)->get()->row()->tarif_denda;
+		$totalRusakPengguna					= $this->db->select('*')->from('data_pengembalian')->where('denda_id', '2')->where('user_id', $id_user)->get()->num_rows();
+		$totalHilangPengguna				= $this->db->select('*')->from('data_pengembalian')->where('denda_id', '3')->where('user_id', $id_user)->get()->num_rows();
+		$totalKunjunganPengguna				= $this->db->select('*')->from('data_kunjungan')->where('user_id', $id_user)->get()->num_rows();
 		$data['totalPeminjamanPengguna']	= $totalPeminjamanPengguna;
 		$data['totalPengembalianPengguna']	= $totalPengembalianPengguna;
+		$data['totalDendaPengguna']			= $totalDendaPengguna;
+		$data['totalRusakPengguna']			= $totalRusakPengguna;
+		$data['totalHilangPengguna']		= $totalHilangPengguna;
+		$data['totalKunjunganPengguna']		= $totalKunjunganPengguna;
 
 		$data['title'] = 'Dashboard E-Library';
 		$this->load->view('templates/header', $data);

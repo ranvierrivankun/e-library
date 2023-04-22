@@ -65,23 +65,36 @@
 <!-- Select2 Last -->
 <script src="<?= base_url('') ?>assets/plugins/select2_last/dist/js/select2.full.min.js"></script>
 
+<!-- Flatpicker -->
+<script src="<?= base_url('') ?>assets/plugins/flatpickr/flatpickr.js"></script>
+<script src="<?= base_url('') ?>assets/plugins/flatpickr/monthSelect/index.js"></script>
+
 </body>
 </html>
 
-<!-- Get File Name -->
 <script>
+  /*Get File Name*/
   $('.custom-file-input').on('change', function() {
     let fileName = $(this).val().split('\\').pop();
     $(this).next('.custom-file-label').html(fileName)
   });
+
+/*Filter Range Date*/
+  $('.range').flatpickr({
+    altInput: true,
+    altFormat: "d-m-Y",
+    dateFormat: "Y-m-d",
+    disableMobile: "true",
+    mode: "range"
+  })
 </script>
 
 <style type="text/css" media="screen">
-    .swal2-container {
-      z-index: 1000000;
+  .swal2-container {
+    z-index: 1000000;
   }
   .edit-body{
     height: 120;
     overflow-y: auto;
-}
+  }
 </style>

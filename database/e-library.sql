@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 08:17 PM
+-- Generation Time: Apr 22, 2023 at 08:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -109,7 +109,8 @@ CREATE TABLE `data_kunjungan` (
 --
 
 INSERT INTO `data_kunjungan` (`id_kunjungan`, `user_id`, `tanggal_kunjungan`, `jam_kunjungan`, `tujuan_kunjungan`) VALUES
-(1, 3, '2023-04-21', '20:09:11', 'Ingin mencari Refrensi untuk skripsi saya, terimakasih');
+(1, 3, '2023-04-21', '20:09:11', 'Ingin mencari Refrensi untuk skripsi saya, terimakasih'),
+(2, 4, '2023-04-22', '17:59:20', 'Test Kunjungan Aja');
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,8 @@ INSERT INTO `data_peminjaman` (`id_peminjaman`, `status_peminjaman`, `status_pen
 (57, 3, 2, 3, 6, '2023-04-21', '13:48:07', 2, '2023-04-21', 1),
 (59, 3, 2, 4, 8, '2023-04-21', '14:20:42', 1, '2023-04-21', 1),
 (62, 3, 2, 4, 8, '2023-04-21', '14:41:46', 2, '2023-04-21', 2),
-(63, 3, 2, 4, 8, '2023-04-21', '14:44:57', 1, '2023-04-21', 2);
+(63, 3, 2, 4, 8, '2023-04-21', '14:44:57', 1, '2023-04-21', 2),
+(64, 3, 2, 3, 6, '2023-04-22', '20:33:50', 1, '2023-04-22', 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +192,8 @@ INSERT INTO `data_pengembalian` (`id_pengembalian`, `user_id`, `buku_id`, `pemin
 (12, 3, 6, 57, '2023-04-21', '14:00:56', 2, '2023-04-21', 2),
 (14, 4, 8, 59, '2023-04-21', '14:21:26', 1, '2023-04-21', 1),
 (17, 4, 8, 62, '2023-04-21', '14:43:13', 3, '2023-04-21', 2),
-(18, 4, 8, 63, '2023-04-21', '14:45:09', 3, '2023-04-21', 2);
+(18, 4, 8, 63, '2023-04-21', '14:45:09', 3, '2023-04-21', 2),
+(19, 3, 6, 64, '2023-04-22', '20:34:23', 1, '2023-04-22', 1);
 
 -- --------------------------------------------------------
 
@@ -357,13 +360,13 @@ ALTER TABLE `data_kategori`
 -- AUTO_INCREMENT for table `data_kunjungan`
 --
 ALTER TABLE `data_kunjungan`
-  MODIFY `id_kunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `data_peminjaman`
 --
 ALTER TABLE `data_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `data_penerbit`
@@ -375,7 +378,7 @@ ALTER TABLE `data_penerbit`
 -- AUTO_INCREMENT for table `data_pengembalian`
 --
 ALTER TABLE `data_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `data_user`

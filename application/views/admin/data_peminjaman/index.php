@@ -217,7 +217,7 @@
     })
   }
 
-   /* Table Data Buku */
+   /* Table Data Peminjaman */
   function table_peminjaman_buku() {
 
     $(document).ready(function() {
